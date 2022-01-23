@@ -85,7 +85,6 @@ CREATE TABLE movies (
 
 CREATE TABLE top_cast_members (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  movie_title TEXT,
   actor TEXT,
   character TEXT,
   movie_id INTEGER
@@ -95,6 +94,63 @@ CREATE TABLE top_cast_members (
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
+--Movies Table
+INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
+VALUES("Batman Begins","2005","PG-13","Christopher Nolan");
+
+INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
+VALUES("The Dark Knight","2008","PG-13","Christopher Nolan");
+
+INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
+VALUES("The Dark Knight Rises","2012","PG-13","Christopher Nolan");
+
+--Cast Table
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Christian Bale","Bruce Wayne","1");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Michael Caine","Alfred","1");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Liam Neeson","Ra's Al Ghul","1");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Katie Holmes","Rachel Dawes","1");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Gary Oldman","Commissioner Gordon","1");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Christian Bale","Bruce Wayne","2");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Heath Ledger","Joker","2");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Aaron Eckhart","Harvey Dent","2");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Michael Caine","Alfred","2");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Maggie Gyllenhaal","Rachel Dawes","2");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Christian Bale","Bruce Wayne","3");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Gary Oldman","Commissioner Gordon","3");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Tom Hardy","Bane","3");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Joseph Gordon-Levitt","John Blake","3");
+
+INSERT INTO top_cast_members (actor,character,movie_id)
+VALUES ("Anne Hathaway","Selina Kyle","3");
+
+
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -102,6 +158,8 @@ CREATE TABLE top_cast_members (
 
 -- The SQL statement for the movies output
 -- TODO!
+
+SELECT * FROM movies;
 
 -- Prints a header for the cast output
 .print ""
@@ -112,3 +170,8 @@ CREATE TABLE top_cast_members (
 
 -- The SQL statement for the cast output
 -- TODO!
+
+SELECT movie_title, actor, character 
+FROM movies
+JOIN top_cast_members
+  ON movies.id=top_cast_members.movie_id;
