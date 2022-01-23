@@ -70,7 +70,8 @@
 -- TODO!
 
 DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS top_cast_members;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS castings;
 
 -- Create new tables, according to your domain model
 -- TODO!
@@ -83,12 +84,18 @@ CREATE TABLE movies (
   director TEXT
 );
 
-CREATE TABLE top_cast_members (
+CREATE TABLE actors (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   actor TEXT,
-  character TEXT,
-  movie_id INTEGER
+  character TEXT
 );
+
+CREATE TABLE castings (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie_id INTEGER,
+  actor_id INTEGER
+);
+
 
 --could also add another table with actor information and actor_ids if we had more information on them (e.g. how much they're paid, where they're from)
 
@@ -98,59 +105,41 @@ CREATE TABLE top_cast_members (
 
 --Movies Table
 INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
-VALUES("Batman Begins","2005","PG-13","Christopher Nolan");
+VALUES("Batman Begins","2005","PG-13","Christopher Nolan")
+,("The Dark Knight","2008","PG-13","Christopher Nolan")
+,("The Dark Knight Rises","2012","PG-13","Christopher Nolan");
 
-INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
-VALUES("The Dark Knight","2008","PG-13","Christopher Nolan");
+--Actors Table
+INSERT INTO actors (actor,character)
+VALUES ("Christian Bale","Bruce Wayne")
+,("Michael Caine","Alfred")
+,("Liam Neeson","Ra's Al Ghul")
+,("Katie Holmes","Rachel Dawes")
+,("Gary Oldman","Commissioner Gordon")
+,("Heath Ledger","Joker")
+,("Aaron Eckhart","Harvey Dent")
+,("Michael Caine","Alfred")
+,("Maggie Gyllenhaal","Rachel Dawes")
+,("Tom Hardy","Bane")
+,("Joseph Gordon-Levitt","John Blake")
+,("Anne Hathaway","Selina Kyle"); 
 
-INSERT INTO movies (movie_title, year_released, mpaa_rating, director)
-VALUES("The Dark Knight Rises","2012","PG-13","Christopher Nolan");
-
---Cast Table
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Christian Bale","Bruce Wayne","1");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Michael Caine","Alfred","1");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Liam Neeson","Ra's Al Ghul","1");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Katie Holmes","Rachel Dawes","1");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Gary Oldman","Commissioner Gordon","1");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Christian Bale","Bruce Wayne","2");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Heath Ledger","Joker","2");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Aaron Eckhart","Harvey Dent","2");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Michael Caine","Alfred","2");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Maggie Gyllenhaal","Rachel Dawes","2");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Christian Bale","Bruce Wayne","3");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Gary Oldman","Commissioner Gordon","3");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Tom Hardy","Bane","3");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Joseph Gordon-Levitt","John Blake","3");
-
-INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Anne Hathaway","Selina Kyle","3"); 
+INSERT INTO castings (movie_id, actor_id)
+VALUES (1,1)
+,(1,2)
+,(1,3)
+,(1,4)
+,(1,5)
+,(2,1)
+,(2,6)
+,(2,7)
+,(2,2)
+,(2,9)
+,(3,1)
+,(3,5)
+,(3,10)
+,(3,11)
+,(3,12);
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -172,57 +161,9 @@ SELECT * FROM movies;
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT movie_title, actor, character 
+SELECT movies.movie_title, actors.actor, actors.character
 FROM movies
-JOIN top_cast_members
-  ON movies.id=top_cast_members.movie_id;
-
-
-/*
---if i were to add an actors table
-
---Actors Table
-
-DROP TABLE IF EXISTS actors;
-
-CREATE TABLE actors (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  actor TEXT
-);
-
-INSERT INTO actors (actor)
-VALUES ("Christian Bale");
-
-INSERT INTO actors (actor)
-VALUES ("Michael Caine");
-
-INSERT INTO actors (actor)
-VALUES ("Liam Neeson");
-
-INSERT INTO actors (actor)
-VALUES ("Katie Holmes");
-
-INSERT INTO actors (actor)
-VALUES ("Gary Oldman");
-
-INSERT INTO actors (actor)
-VALUES ("Heath Ledger");
-
-INSERT INTO actors (actor)
-VALUES ("Aaron Eckhart");
-
-INSERT INTO actors (actor)
-VALUES ("Maggie Gyllenhaal");
-
-INSERT INTO actors (actor)
-VALUES ("Tom Hardy");
-
-INSERT INTO actors (actor)
-VALUES ("Joseph Gordon-Levitt");
-
-INSERT INTO actors (actor)
-VALUES ("Anne Hathaway");
-
---then add corresponding actor_id into top_cast_members table as a new column
-
-*/
+JOIN castings
+  ON movies.id=castings.movie_id
+JOIN actors
+  ON castings.actor_id=actors.id;
