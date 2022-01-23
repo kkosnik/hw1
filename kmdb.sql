@@ -223,6 +223,6 @@ VALUES ("Joseph Gordon-Levitt");
 INSERT INTO actors (actor)
 VALUES ("Anne Hathaway");
 
---then add corresponding actor_id into top_cast_members table
+--then add corresponding actor_id into top_cast_members table as a new column
 
 */
