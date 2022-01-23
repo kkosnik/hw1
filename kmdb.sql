@@ -90,6 +90,8 @@ CREATE TABLE top_cast_members (
   movie_id INTEGER
 );
 
+--could also add another table with actor information and actor_ids if we had more information on them (e.g. how much they're paid, where they're from)
+
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
