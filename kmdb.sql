@@ -150,8 +150,7 @@ INSERT INTO top_cast_members (actor,character,movie_id)
 VALUES ("Joseph Gordon-Levitt","John Blake","3");
 
 INSERT INTO top_cast_members (actor,character,movie_id)
-VALUES ("Anne Hathaway","Selina Kyle","3");
-
+VALUES ("Anne Hathaway","Selina Kyle","3"); 
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -177,3 +176,53 @@ SELECT movie_title, actor, character
 FROM movies
 JOIN top_cast_members
   ON movies.id=top_cast_members.movie_id;
+
+
+/*
+--if i were to add an actors table
+
+--Actors Table
+
+DROP TABLE IF EXISTS actors;
+
+CREATE TABLE actors (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  actor TEXT
+);
+
+INSERT INTO actors (actor)
+VALUES ("Christian Bale");
+
+INSERT INTO actors (actor)
+VALUES ("Michael Caine");
+
+INSERT INTO actors (actor)
+VALUES ("Liam Neeson");
+
+INSERT INTO actors (actor)
+VALUES ("Katie Holmes");
+
+INSERT INTO actors (actor)
+VALUES ("Gary Oldman");
+
+INSERT INTO actors (actor)
+VALUES ("Heath Ledger");
+
+INSERT INTO actors (actor)
+VALUES ("Aaron Eckhart");
+
+INSERT INTO actors (actor)
+VALUES ("Maggie Gyllenhaal");
+
+INSERT INTO actors (actor)
+VALUES ("Tom Hardy");
+
+INSERT INTO actors (actor)
+VALUES ("Joseph Gordon-Levitt");
+
+INSERT INTO actors (actor)
+VALUES ("Anne Hathaway");
+
+--then add corresponding actor_id into top_cast_members table
+
+*/
